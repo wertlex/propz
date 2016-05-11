@@ -5,7 +5,7 @@
 'use strict';
 
 const   chai        = require('chai'),
-        dotten      = require('../src/dotten');
+        dotten      = require('../../src/dotten');
 
 const expect = chai.expect;
 
@@ -20,7 +20,8 @@ describe('dotten', () => {
                     array1: [ 1, 2, 3],
                     array2: [
                         {id: 123},
-                        {id: 234}]
+                        {id: 234}
+                    ]
                 }
             }
         };
