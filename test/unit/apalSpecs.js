@@ -5,11 +5,11 @@
 'use strict';
 
 const   chai        = require('chai'),
-        dotten      = require('../../src/dotten');
+        dotten      = require('../../src/apal');
 
 const expect = chai.expect;
 
-describe('dotten', () => {
+describe('apal', () => {
     it('should get value with "get"', () => {
         const obj = {
             one: {

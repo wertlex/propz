@@ -3,7 +3,7 @@
  */
 
 const   Benchmark       = require('benchmark'),
-        dotten          = require('../../src/dotten');
+        dotten          = require('../../src/apal');
 
 const input = {
     _id:         "572604ba5e3cac390e764464",
