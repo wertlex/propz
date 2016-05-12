@@ -1,6 +1,6 @@
 {
   "name": "apal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Another Property Access Library",
   "main": "src/apal.js",
   "files": [
