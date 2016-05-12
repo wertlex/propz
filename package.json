@@ -1,10 +1,15 @@
 {
   "name": "apal",
   "version": "0.0.1",
-  "description": "One more lib for nested properties access",
-  "main": "index.js",
+  "description": "Another Property Access Library",
+  "main": "src/apal.js",
+  "files": [
+    "src/",
+    "LICENSE"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test",
+    "prepublish": "gulp lint"
   },
   "repository": {
     "type": "git",
@@ -20,9 +25,9 @@
   "author": "Alex V. Povar",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/SquadInTouch/dotten/issues"
+    "url": "https://github.com/SquadInTouch/apal/issues"
   },
-  "homepage": "https://github.com/SquadInTouch/dotten#readme",
+  "homepage": "https://github.com/SquadInTouch/apal#readme",
   "devDependencies": {
     "benchmark": "^2.1.0",
     "chai": "^3.5.0",
