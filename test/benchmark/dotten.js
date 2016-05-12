@@ -16,10 +16,10 @@ const input = {
     blocked: false
 };
 
-const json = new Benchmark.Suite('');
-json
+const jsonGet = new Benchmark.Suite('');
+jsonGet
     .add('direct access 1st level', () => {
-        input['firstName']
+        input['firstName'];
     })
     .add('dotten.get 1st level', () => {
         dotten.get(input, ['firstName']);
@@ -32,6 +32,23 @@ json
     })
     .add('dotten.get 4th level', () => {
         dotten.get(input, ['verification', 'status', 'identity', 'city']);
+    })
+    .on('cycle', function(event) {
+        console.log(String(event.target));
+    })
+    .on('complete', function() {
+        console.log('Fastest is ' + this.filter('fastest').map('name'));
+    })
+    .run({ async: false });
+
+
+const jsonSet = new Benchmark.Suite('JsonSet');
+jsonSet
+    .add('direct set', () => {
+        input['firstName'] = "John";
+    })
+    .add('dotten.set 1st level', () => {
+        dotten.set(input, ['firstName'], 'John');
     })
     .on('cycle', function(event) {
         console.log(String(event.target));

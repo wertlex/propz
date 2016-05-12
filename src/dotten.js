@@ -48,7 +48,7 @@ function _get(object, path) {
  *
  */
 function get(object, path) {
-    /** will perform some very straight optimizations. Yes, it really does performance boost acording to benchmarks */
+    /** will perform some very straight optimizations. Yes, it really does performance boost according to benchmarks */
     switch (path.length) {
         case 0: return object;
         case 1: return object[path[0]];
@@ -126,12 +126,12 @@ function fitsToSegment(pathSegment, value) {
  *     // }
  *
  */
-function set(object, path, value) {
+function _set(object, path, value) {
     let currentValue = object;
     for(let i = 0, len = path.length; i < len; i++) {
         if(i !== len - 1) {                                                 // if not last element
             const   currentSegment  = path[i],                              // saving few calls.
-                nextSegment     = path[i + 1];                          // saving few calls.
+                    nextSegment     = path[i + 1];                          // saving few calls.
             let nextContainer = currentValue[currentSegment];               // trying to locate container for next step
             if(!fitsToSegment(nextSegment, currentValue[currentSegment])) { // checking if there is a container of given type
                 nextContainer = createContainerForPathSegment(nextSegment); // if no container or container of wrong type - creating new one
@@ -145,6 +145,17 @@ function set(object, path, value) {
     return object;
 }
 
+
+function set(object, path, value) {
+    switch (true) {
+        // if this is one-step path and it is fits to provided object - setting value right now
+        case path.length === 1 && fitsToSegment(path[0], object):
+            object[path[0]] = value;
+            return object;
+        default:
+            return _set(object, path, value);
+    }
+}
 
 module.exports.get = get;
 module.exports.set = set;
