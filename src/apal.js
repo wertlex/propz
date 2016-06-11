@@ -31,7 +31,7 @@ function _get(object, path) {
 
 /**
  * Gets value from object
- * @param object object to take value from
+ * @param object object to take value from. Can be undefined.
  * @param path {Array<String|Number>} array which represents path. Array indexes should be real numbers: 0, 1, 2, etc
  * @returns {*} value at this point or undefined
  *
@@ -48,13 +48,21 @@ function _get(object, path) {
  *
  */
 function get(object, path) {
+    if(typeof object === 'undefined') return undefined; // short path in case if object is undefined
     /** will perform some very straight optimizations. Yes, it really does performance boost according to benchmarks */
     switch (path.length) {
-        case 0: return object;
-        case 1: return object[path[0]];
-        case 2: return (typeof object[path[0]] !== 'undefined') ? object[path[0]][path[1]] : undefined;
-        case 3: return (typeof object[path[0]] !== 'undefined' && typeof object[path[0]][path[1]] !== 'undefined') ? object[path[0]][path[1]][path[2]] : undefined;
-        default: return _get(object, path);
+        case 0: 
+            return object;
+        case 1: 
+            return object[path[0]];
+        case 2:
+            const value0_2 = object[path[0]];
+            return (typeof value0_2 !== 'undefined') ? value0_2[path[1]] : undefined;
+        case 3:
+            const value0_3 = object[path[0]];
+            return (typeof value0_3 !== 'undefined' && typeof value0_3[path[1]] !== 'undefined') ? value0_3[path[1]][path[2]] : undefined;
+        default: 
+            return _get(object, path);
     }
 }
 
