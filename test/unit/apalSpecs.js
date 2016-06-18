@@ -33,6 +33,23 @@ describe('apal', () => {
         expect(dotten.get(obj, ['six', 'two', 'array2', 0, "id"])).to.be.undefined;
     });
 
+    it('should return defaultValue with "get"', () => {
+        const obj = {
+            one: {
+                two: {
+                    three: {
+                        name: 'John'
+                    }
+                }
+            }
+        };
+
+        expect(dotten.get(obj, ['one1'])).to.be.undefined;
+		expect(dotten.get(obj, ['one1'], "DEFAULT")).to.be.equal('DEFAULT');
+		expect(dotten.get(obj, ['one', 'two2'], "DEFAULT")).to.be.equal('DEFAULT');
+		expect(dotten.get(obj, ['one', 'two', 'tres'], "DEFAULT")).to.be.equal('DEFAULT');
+    });
+
     it('should get closest value with "getClosest"', () => {
         const obj = {
             one: {

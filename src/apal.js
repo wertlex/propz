@@ -47,23 +47,31 @@ function _get(object, path) {
  *     const friendId1 = get(obj, ['user', 'friendIds', 1]);  // return 33
  *
  */
-function get(object, path) {
-    if(typeof object === 'undefined') return undefined; // short path in case if object is undefined
+function get(object, path, defaultValue) {
+    if(typeof object === 'undefined') return defaultValue; // short path in case if object is undefined
     /** will perform some very straight optimizations. Yes, it really does performance boost according to benchmarks */
-    switch (path.length) {
+    let result;
+	switch (path.length) {
         case 0: 
-            return object;
+            result = object;  // is always defined as we check it before switch
+			break;
         case 1: 
-            return object[path[0]];
+            result = object[path[0]];
+			break;
         case 2:
             const value0_2 = object[path[0]];
-            return (typeof value0_2 !== 'undefined') ? value0_2[path[1]] : undefined;
+            result = (typeof value0_2 !== 'undefined') ? value0_2[path[1]] : undefined;
+			break;
         case 3:
             const value0_3 = object[path[0]];
-            return (typeof value0_3 !== 'undefined' && typeof value0_3[path[1]] !== 'undefined') ? value0_3[path[1]][path[2]] : undefined;
+            result = (typeof value0_3 !== 'undefined' && typeof value0_3[path[1]] !== 'undefined') ? value0_3[path[1]][path[2]] : undefined;
+			break;
         default: 
-            return _get(object, path);
+            result = _get(object, path);
     }
+	
+	/* TODO: Maybe it will be much better to use this in each 'case' statement. But this way is quicker and easier. */
+	return (typeof result !== 'undefined') ? result : defaultValue; 
 }
 
 /** Will return value which best fits to provided path. For ex. if there is no ['a', 'b'], but there is ['a'],
