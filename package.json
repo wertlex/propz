@@ -25,9 +25,9 @@
   "author": "Alex V. Povar",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/SquadInTouch/apal/issues"
+    "url": "https://github.com/SquadInTouch/propz/issues"
   },
-  "homepage": "https://github.com/SquadInTouch/apal#readme",
+  "homepage": "https://github.com/SquadInTouch/propz#readme",
   "devDependencies": {
     "benchmark": "^2.1.0",
     "chai": "^3.5.0",
