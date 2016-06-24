@@ -1,4 +1,4 @@
-# Another Property Access Library
+# Propz
 
 ## What is that ?
 
@@ -7,13 +7,13 @@ This is one more library for nested property access within Javascript objects. I
 ## How to install it ?
 
 ```
-npm install apal
+npm install propz
 ```
 
 ## How to use it ?
 
 ```javascript
-var apal = require('apal');
+var propz = require('propz');
 
 var myObject = {
   name: 'John',
@@ -23,8 +23,8 @@ var myObject = {
   }
 };
 
-var emailNotifications = apal.get(myObject, ['notifications', 'email']);
+var emailNotifications = propz.get(myObject, ['notifications', 'email']);
 
-apal.set(myObject, ['notifications', 'personal', true]);
+propz.set(myObject, ['notifications', 'personal', true]);
 
 ```

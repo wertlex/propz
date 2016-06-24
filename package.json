@@ -1,8 +1,8 @@
 {
-  "name": "apal",
+  "name": "propz",
   "version": "0.1.1",
   "description": "Another Property Access Library",
-  "main": "src/apal.js",
+  "main": "src/propz.js",
   "files": [
     "src/",
     "LICENSE"
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SquadInTouch/apal.git"
+    "url": "git+https://github.com/SquadInTouch/propz.git"
   },
   "keywords": [
     "path",
@@ -25,9 +25,9 @@
   "author": "Alex V. Povar",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/SquadInTouch/apal/issues"
+    "url": "https://github.com/SquadInTouch/propz/issues"
   },
-  "homepage": "https://github.com/SquadInTouch/apal#readme",
+  "homepage": "https://github.com/SquadInTouch/propz#readme",
   "devDependencies": {
     "benchmark": "^2.1.0",
     "chai": "^3.5.0",
