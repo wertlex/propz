@@ -2,7 +2,7 @@
   "name": "propz",
   "version": "0.1.1",
   "description": "Another Property Access Library",
-  "main": "src/apal.js",
+  "main": "src/propz.js",
   "files": [
     "src/",
     "LICENSE"
