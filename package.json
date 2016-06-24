@@ -1,5 +1,5 @@
 {
-  "name": "apal",
+  "name": "propz",
   "version": "0.1.1",
   "description": "Another Property Access Library",
   "main": "src/apal.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SquadInTouch/apal.git"
+    "url": "git+https://github.com/SquadInTouch/propz.git"
   },
   "keywords": [
     "path",
