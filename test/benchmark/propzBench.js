@@ -3,10 +3,11 @@
  */
 
 const   Benchmark       = require('benchmark'),
-        dotten          = require('../../src/propz');
+        propz          	= require('../../src/propz'),
+        dotty			= require('dotty');
 
 const input = {
-    _id:         "572604ba5e3cac390e764464",
+    _id:       	"572604ba5e3cac390e764464",
     email:      "reference@mail.com",
     firstName:  "Petr",
     lastName:   "Pustota",
@@ -21,18 +22,30 @@ jsonGet
     .add('direct access 1st level', () => {
         input['firstName'];
     })
-    .add('dotten.get 1st level', () => {
-        dotten.get(input, ['firstName']);
+    .add('propz.get 1st level', () => {
+        propz.get(input, ['firstName']);
     })
-    .add('dotten.get 2nd level', () => {
-        dotten.get(input, ['verification', 'status']);
+	.add('dotty.get 1st level', () => {
+		dotty.get(input, ['firstName']);
+	})
+    .add('propz.get 2nd level', () => {
+        propz.get(input, ['verification', 'status']);
     })
-    .add('dotten.get 3rd level', () => {
-        dotten.get(input, ['verification', 'status', 'email']);
+	.add('dotty.get 2nd level', () => {
+		dotty.get(input, ['verification', 'status']);
+	})
+    .add('propz.get 3rd level', () => {
+        propz.get(input, ['verification', 'status', 'email']);
     })
-    .add('dotten.get 4th level', () => {
-        dotten.get(input, ['verification', 'status', 'identity', 'city']);
+	.add('dotty.get 3rd level', () => {
+		dotty.get(input, ['verification', 'status', 'email']);
+	})
+    .add('propz.get 4th level', () => {
+        propz.get(input, ['verification', 'status', 'identity', 'city']);
     })
+	.add('dotty.get 4th level', () => {
+		dotty.get(input, ['verification', 'status', 'identity', 'city']);
+	})
     .on('cycle', function(event) {
         console.log(String(event.target));
     })
@@ -47,8 +60,8 @@ jsonSet
     .add('direct set', () => {
         input['firstName'] = "John";
     })
-    .add('dotten.set 1st level', () => {
-        dotten.set(input, ['firstName'], 'John');
+    .add('propz.set 1st level', () => {
+        propz.set(input, ['firstName'], 'John');
     })
     .on('cycle', function(event) {
         console.log(String(event.target));
