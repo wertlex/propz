@@ -27,7 +27,7 @@ var myObject = {
 
 var emailNotifications = propz.get(myObject, ['notifications', 'email']);
 
-propz.set(myObject, ['notifications', 'personal', true]);
+propz.set(myObject, ['notifications', 'personal'], true);
 
 ```
 
