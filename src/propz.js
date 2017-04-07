@@ -5,7 +5,7 @@
 
 'use strict';
 
-const types = require('./types');
+var types = require('./types');
 
 
 /** Okay, maybe you interested to know why we need this DIY shit right here. This is good question :)
@@ -20,8 +20,8 @@ const types = require('./types');
 
 /** will traverse deep into object while it is possible */
 function _get(object, path) {
-    let currentValue = object;
-    for(let i = 0, len = path.length; i < len; i++) {
+	var currentValue = object;
+    for(var i = 0, len = path.length; i < len; i++) {
         currentValue = currentValue[path[i]];
         if(typeof currentValue === 'undefined') break;
     }
@@ -50,7 +50,7 @@ function _get(object, path) {
 function get(object, path, defaultValue) {
     if(typeof object === 'undefined') return defaultValue; // short path in case if object is undefined
     /** will perform some very straight optimizations. Yes, it really does performance boost according to benchmarks */
-    let result;
+	var result;
 	switch (path.length) {
         case 0: 
             result = object;  // is always defined as we check it before switch
@@ -59,11 +59,11 @@ function get(object, path, defaultValue) {
             result = object[path[0]];
 			break;
         case 2:
-            const value0_2 = object[path[0]];
+			var value0_2 = object[path[0]];
             result = (typeof value0_2 !== 'undefined') ? value0_2[path[1]] : undefined;
 			break;
         case 3:
-            const value0_3 = object[path[0]];
+			var value0_3 = object[path[0]];
             result = (typeof value0_3 !== 'undefined' && typeof value0_3[path[1]] !== 'undefined') ? value0_3[path[1]][path[2]] : undefined;
 			break;
         default: 
@@ -78,10 +78,10 @@ function get(object, path, defaultValue) {
  *  ['a'] result will returned
  */
 function getClosest(object, path){
-    let currentValue = object,
+	var currentValue = object,
         closestValue;
-    for(let i = 0, len = path.length; i < len; i++) {
-        let nextValue = currentValue[path[i]];
+    for(var i = 0, len = path.length; i < len; i++) {
+		var nextValue = currentValue[path[i]];
         if(typeof nextValue === 'undefined') break;
         else {
             closestValue = nextValue;
@@ -98,7 +98,7 @@ function getClosest(object, path){
  * @returns {*}
  */
 function createContainerForPathSegment(pathSegment){
-    const isPathSegmentNumber = types.isNumber(pathSegment);
+	var isPathSegmentNumber = types.isNumber(pathSegment);
     if(isPathSegmentNumber) return [];
     else                    return {};
 }
@@ -113,7 +113,7 @@ function createContainerForPathSegment(pathSegment){
  * @returns {*|boolean}
  */
 function fitsToSegment(pathSegment, value) {
-    const isPathSegmentNumber = types.isNumber(pathSegment);
+	var isPathSegmentNumber = types.isNumber(pathSegment);
     return (isPathSegmentNumber && types.isArray(value)) || ( !isPathSegmentNumber && types.isJSONObject(value))
 }
 
@@ -143,12 +143,12 @@ function fitsToSegment(pathSegment, value) {
  *
  */
 function _set(object, path, value) {
-    let currentValue = object;
-    for(let i = 0, len = path.length; i < len; i++) {
+	var currentValue = object;
+    for(var i = 0, len = path.length; i < len; i++) {
         if(i !== len - 1) {                                                 // if not last element
-            const   currentSegment  = path[i],                              // saving few calls.
+			var   currentSegment  = path[i],                              // saving few calls.
                     nextSegment     = path[i + 1];                          // saving few calls.
-            let nextContainer = currentValue[currentSegment];               // trying to locate container for next step
+			var nextContainer = currentValue[currentSegment];               // trying to locate container for next step
             if(!fitsToSegment(nextSegment, currentValue[currentSegment])) { // checking if there is a container of given type
                 nextContainer = createContainerForPathSegment(nextSegment); // if no container or container of wrong type - creating new one
                 currentValue[currentSegment] = nextContainer;               // and saving it as next value
