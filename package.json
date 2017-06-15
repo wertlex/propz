@@ -1,6 +1,6 @@
 {
   "name": "propz",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Another Property Access Library",
   "main": "src/propz.js",
   "files": [
