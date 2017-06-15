@@ -173,6 +173,38 @@ function set(object, path, value) {
     }
 }
 
+function getDeepKeys(object, prefix) {
+    prefix = prefix || [];
+    let keys = [];
+
+    const isObjectArray = Array.isArray(object);
+
+    for(let key in object) {
+        if(!object.hasOwnProperty(key)) {
+            continue;
+        }
+
+        const   value       	= object[key],
+                valueType   	= typeof value,
+				isNull			= value === null,
+				optIntKey		= isObjectArray ? parseInt(key) : NaN;
+
+        // convert to int if array and key is convertable to int
+        key = isObjectArray && !isNaN(optIntKey) ? optIntKey : key;
+
+        if(valueType !== 'object') {
+            keys.push(prefix.concat([key]));
+        }
+
+        if(valueType === 'object' && !isNull) {
+			keys = keys.concat(getDeepKeys(value, prefix.concat([key])));
+        }
+    }
+
+    return keys;
+}
+
 module.exports.get = get;
 module.exports.set = set;
 module.exports.getClosest = getClosest;
+module.exports.getDeepKeys = getDeepKeys;

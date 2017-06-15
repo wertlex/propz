@@ -5,7 +5,7 @@
 'use strict';
 
 const   chai        = require('chai'),
-        dotten      = require('../../src/propz');
+        propz      = require('../../src/propz');
 
 const expect = chai.expect;
 
@@ -26,11 +26,11 @@ describe('propz', () => {
             }
         };
 
-        expect(dotten.get(obj, ['one', 'two', 'three'])).to.be.deep.equal({ name: "John" });
-        expect(dotten.get(obj, ['one', 'two', 'three', 'name'])).to.be.equal("John");
-        expect(dotten.get(obj, ['one', 'two', 'array1', 0])).to.be.equal(1);
-        expect(dotten.get(obj, ['one', 'two', 'array2', 0, "id"])).to.be.equal(123);
-        expect(dotten.get(obj, ['six', 'two', 'array2', 0, "id"])).to.be.undefined;
+        expect(propz.get(obj, ['one', 'two', 'three'])).to.be.deep.equal({ name: "John" });
+        expect(propz.get(obj, ['one', 'two', 'three', 'name'])).to.be.equal("John");
+        expect(propz.get(obj, ['one', 'two', 'array1', 0])).to.be.equal(1);
+        expect(propz.get(obj, ['one', 'two', 'array2', 0, "id"])).to.be.equal(123);
+        expect(propz.get(obj, ['six', 'two', 'array2', 0, "id"])).to.be.undefined;
     });
 
     it('should return defaultValue with "get"', () => {
@@ -44,10 +44,10 @@ describe('propz', () => {
             }
         };
 
-        expect(dotten.get(obj, ['one1'])).to.be.undefined;
-		expect(dotten.get(obj, ['one1'], "DEFAULT")).to.be.equal('DEFAULT');
-		expect(dotten.get(obj, ['one', 'two2'], "DEFAULT")).to.be.equal('DEFAULT');
-		expect(dotten.get(obj, ['one', 'two', 'tres'], "DEFAULT")).to.be.equal('DEFAULT');
+        expect(propz.get(obj, ['one1'])).to.be.undefined;
+		expect(propz.get(obj, ['one1'], "DEFAULT")).to.be.equal('DEFAULT');
+		expect(propz.get(obj, ['one', 'two2'], "DEFAULT")).to.be.equal('DEFAULT');
+		expect(propz.get(obj, ['one', 'two', 'tres'], "DEFAULT")).to.be.equal('DEFAULT');
     });
 
     it('should get closest value with "getClosest"', () => {
@@ -61,17 +61,17 @@ describe('propz', () => {
             }
         };
 
-        expect(dotten.getClosest(obj, ['one', 'two', 'three'])).to.be.deep.equal({name: 'John'});
-        expect(dotten.getClosest(obj, ['one', 'two', 'three', 'name'])).to.be.equal('John');
-        expect(dotten.getClosest(obj, ['one', 'two', 'three', 'name', 'details'])).to.be.equal('John');
-        expect(dotten.getClosest(obj, ['uno', 'two', 'three', 'name', 'details'])).to.be.undefined;
+        expect(propz.getClosest(obj, ['one', 'two', 'three'])).to.be.deep.equal({name: 'John'});
+        expect(propz.getClosest(obj, ['one', 'two', 'three', 'name'])).to.be.equal('John');
+        expect(propz.getClosest(obj, ['one', 'two', 'three', 'name', 'details'])).to.be.equal('John');
+        expect(propz.getClosest(obj, ['uno', 'two', 'three', 'name', 'details'])).to.be.undefined;
     });
 
     it('should set not nested values with "set"', () => {
         const obj = {};
-        dotten.set(obj, ['A'], 'a');
-        dotten.set(obj, ['B'], 'b');
-        dotten.set(obj, ['whatthehell'], 'really?');
+        propz.set(obj, ['A'], 'a');
+        propz.set(obj, ['B'], 'b');
+        propz.set(obj, ['whatthehell'], 'really?');
         expect(obj).to.be.deep.equal({
             A: 'a',
             B: 'b',
@@ -81,10 +81,10 @@ describe('propz', () => {
 
     it('should set nested values with "set"', () => {
         const obj = {};
-        dotten.set(obj, ['A', 'B'], 'ab');
-        dotten.set(obj, ['One', 'Two'], '12');
-        dotten.set(obj, ['A', 'C'], 'ac');
-        dotten.set(obj, ['whatthehell'], 'really?');
+        propz.set(obj, ['A', 'B'], 'ab');
+        propz.set(obj, ['One', 'Two'], '12');
+        propz.set(obj, ['A', 'C'], 'ac');
+        propz.set(obj, ['whatthehell'], 'really?');
         expect(obj).to.be.deep.equal({
             A: {
                 B: 'ab',
@@ -99,14 +99,14 @@ describe('propz', () => {
 
     it('should set nested values in arrays with "set"', () => {
         const obj = {};
-        dotten.set(obj, ['A', 'B'], 'ab');
-        dotten.set(obj, ['One', 'Two'], '12');
-        dotten.set(obj, ['A', 'C'], 'ac');
-        dotten.set(obj, ['A', 'arr1', 0], '1st');
-        dotten.set(obj, ['A', 'arr1', 1], '2nd');
-        dotten.set(obj, ['arr2', 0], 'one');
-        dotten.set(obj, ['arr2', 1, 'name'], 'John');
-        dotten.set(obj, ['whatthehell'], 'really?');
+        propz.set(obj, ['A', 'B'], 'ab');
+        propz.set(obj, ['One', 'Two'], '12');
+        propz.set(obj, ['A', 'C'], 'ac');
+        propz.set(obj, ['A', 'arr1', 0], '1st');
+        propz.set(obj, ['A', 'arr1', 1], '2nd');
+        propz.set(obj, ['arr2', 0], 'one');
+        propz.set(obj, ['arr2', 1, 'name'], 'John');
+        propz.set(obj, ['whatthehell'], 'really?');
         expect(obj).to.be.deep.equal({
             A: {
                 B: 'ab',
@@ -122,4 +122,51 @@ describe('propz', () => {
             whatthehell: 'really?'
         });
     });
+
+    it('should get all paths for plain object with getDeepKeys', () => {
+        const obj = {
+            one: 'one',
+            two: 'two'
+        };
+
+        const result = propz.getDeepKeys(obj);
+        expect(result).to.be.deep.equal([['one'], ['two']]);
+    });
+
+	it('should get int paths for plain array with getDeepKeys', () => {
+		const arrObj = ['a', 'b', 'c'];
+
+		const result = propz.getDeepKeys(arrObj);
+		expect(result).to.be.deep.equal([
+			[0],
+			[1],
+			[2]
+		]);
+	});
+
+    it('should get all paths for nested object with getDeepKeys', () => {
+		const obj = {
+			one: 'one',
+			two: 'two',
+			nested: {
+				three:	3,
+				four:	'four'
+			},
+			simpleArr: [1, 2],
+			complexArr: [
+				{ a: '1' }
+			]
+		};
+
+		const result = propz.getDeepKeys(obj);
+		expect(result).to.be.deep.equal([
+			['one'],
+			['two'],
+			['nested', 'three'],
+			['nested', 'four'],
+			['simpleArr', 0],
+			['simpleArr', 1],
+			['complexArr', 0, 'a']
+		]);
+	});
 });
