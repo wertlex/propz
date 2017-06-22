@@ -5,7 +5,7 @@
 'use strict';
 
 /** Some helpers for friendly type detection */
-const Types = {
+var Types = {
     isArray: function(smth){
         return Array.isArray(smth);
     },
