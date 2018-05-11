@@ -1,8 +1,9 @@
 {
   "name": "propz",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Another Property Access Library",
   "main": "src/propz.js",
+  "types": "src/propz.d.ts",
   "files": [
     "src/",
     "LICENSE"
